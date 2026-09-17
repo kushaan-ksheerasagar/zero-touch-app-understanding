@@ -2,7 +2,7 @@
 Type definitions for the Exploration Agent.
 """
 
-from typing import Literal, Optional, Any
+from typing import Literal, Optional, Any, Union
 from dataclasses import dataclass, field
 
 
@@ -26,13 +26,20 @@ class ActionTarget:
 @dataclass
 class AgentAction:
     action: ActionType
-    target: Optional[ActionTarget] = None
+    target: Optional[Union[ActionTarget, dict[str, Any]]] = None
     reason: Optional[str] = None
 
     def to_dict(self) -> dict[str, Any]:
         res: dict[str, Any] = {"action": self.action}
-        if self.target is not None and self.target.to_dict():
-            res["target"] = self.target.to_dict()
+        if self.target is not None:
+            if hasattr(self.target, "to_dict"):
+                t = self.target.to_dict()
+            elif isinstance(self.target, dict):
+                t = self.target
+            else:
+                t = None
+            if t:
+                res["target"] = t
         if self.reason is not None:
             res["reason"] = self.reason
         return res

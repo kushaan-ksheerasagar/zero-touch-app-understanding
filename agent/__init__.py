@@ -4,6 +4,13 @@ Agent package initialization.
 
 from .agent import ExplorationAgent
 from .memory import ExplorationMemory
+from .reasoning import (
+    BaseReasoner,
+    ReasoningContext,
+    RuleBasedReasoner,
+    build_reasoning_context,
+)
+from .safety import SafetyValidator, ValidationResult, validate_action
 from .selector import ActionSelector
 from .semantic import (
     ElementRole,
@@ -28,4 +35,11 @@ __all__ = [
     "classify_element",
     "extract_label",
     "analyze_screen",
+    "ReasoningContext",
+    "build_reasoning_context",
+    "BaseReasoner",
+    "RuleBasedReasoner",
+    "SafetyValidator",
+    "ValidationResult",
+    "validate_action",
 ]
