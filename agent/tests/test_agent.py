@@ -125,6 +125,87 @@ class TestExplorationAgent(unittest.TestCase):
         action = self.agent.step(self.home_screen)
         self.assertEqual(action["target"]["element_id"], "search_button")
 
+    def test_rejects_system_ui_scrim(self):
+        """Test A: System UI scrim and system overlays are rejected."""
+        screen_with_scrim = {
+            "screen_id": "settings_screen",
+            "elements": [
+                {
+                    "element_id": "com.android.systemui:id/scrim_behind",
+                    "type": "android.view.View",
+                    "text": "",
+                    "clickable": True,
+                },
+                {
+                    "element_id": "android:id/statusBarBackground",
+                    "type": "android.view.View",
+                    "text": "",
+                    "clickable": True,
+                },
+                {
+                    "element_id": "com.android.settings:id/search_action_bar",
+                    "type": "android.widget.Button",
+                    "text": "Search settings",
+                    "clickable": True,
+                },
+            ],
+        }
+        action = self.agent.step(screen_with_scrim)
+        self.assertEqual(action["action"], "tap")
+        self.assertEqual(
+            action["target"]["element_id"],
+            "com.android.settings:id/search_action_bar"
+        )
+
+    def test_prefers_meaningful_control_over_meaningless_clickable(self):
+        """Test B: Meaningful application button is preferred over meaningless clickable element."""
+        screen_with_mixed_elements = {
+            "screen_id": "mixed_screen",
+            "elements": [
+                # Meaningless clickable container without text or semantic type
+                {
+                    "element_id": "elem_001_FrameLayout_0_0",
+                    "type": "android.widget.FrameLayout",
+                    "text": "",
+                    "clickable": True,
+                },
+                # Meaningful button with label and real ID
+                {
+                    "element_id": "com.example.app:id/btn_checkout",
+                    "type": "android.widget.Button",
+                    "text": "Checkout Now",
+                    "clickable": True,
+                },
+            ],
+        }
+        action = self.agent.step(screen_with_mixed_elements)
+        self.assertEqual(action["action"], "tap")
+        self.assertEqual(
+            action["target"]["element_id"],
+            "com.example.app:id/btn_checkout"
+        )
+
+    def test_only_system_overlays_returns_back(self):
+        """Test that a screen with only system overlays navigates back."""
+        screen_only_system = {
+            "screen_id": "overlay_screen",
+            "elements": [
+                {
+                    "element_id": "com.android.systemui:id/scrim_behind",
+                    "type": "android.view.View",
+                    "clickable": True,
+                },
+                {
+                    "element_id": "com.android.systemui:id/navigation_bar",
+                    "type": "android.view.View",
+                    "clickable": True,
+                },
+            ],
+        }
+        action = self.agent.step(screen_only_system)
+        self.assertEqual(action, {"action": "back"})
+
 
 if __name__ == "__main__":
     unittest.main()
+
