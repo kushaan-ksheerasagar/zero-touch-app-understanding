@@ -27,9 +27,13 @@ class ActionTarget:
 class AgentAction:
     action: ActionType
     target: Optional[ActionTarget] = None
+    reason: Optional[str] = None
 
     def to_dict(self) -> dict[str, Any]:
         res: dict[str, Any] = {"action": self.action}
         if self.target is not None and self.target.to_dict():
             res["target"] = self.target.to_dict()
+        if self.reason is not None:
+            res["reason"] = self.reason
         return res
+
