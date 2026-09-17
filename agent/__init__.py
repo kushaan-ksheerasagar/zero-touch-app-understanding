@@ -3,6 +3,8 @@ Agent package initialization.
 """
 
 from .agent import ExplorationAgent
+from .gemini_client import DEFAULT_GEMINI_MODEL, GeminiLLMClient
+from .groq_client import DEFAULT_GROQ_MODEL, GroqLLMClient
 from .llm_reasoner import FakeLLMClient, LLMReasoner, build_reasoning_prompt
 from .memory import ExplorationMemory
 from .reasoning import (
@@ -46,4 +48,8 @@ __all__ = [
     "LLMReasoner",
     "build_reasoning_prompt",
     "FakeLLMClient",
+    "GroqLLMClient",
+    "DEFAULT_GROQ_MODEL",
+    "GeminiLLMClient",
+    "DEFAULT_GEMINI_MODEL",
 ]
