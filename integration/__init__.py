@@ -12,6 +12,7 @@ try:
         to_api_screen_state,
         to_controller_action,
     )
+    from .explorer import AutonomousExplorer
     from .fingerprint import compute_screen_fingerprint
     from .knowledge_integration import build_knowledge_builder, build_knowledge_pack
     from .runner import ExplorationResult, IntegrationRunner
@@ -22,11 +23,13 @@ except (ImportError, ValueError):
         to_api_screen_state,
         to_controller_action,
     )
+    from explorer import AutonomousExplorer
     from fingerprint import compute_screen_fingerprint
     from knowledge_integration import build_knowledge_builder, build_knowledge_pack
     from runner import ExplorationResult, IntegrationRunner
 
 __all__ = [
+    "AutonomousExplorer",
     "IntegrationRunner",
     "ExplorationResult",
     "compute_screen_fingerprint",

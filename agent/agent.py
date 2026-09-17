@@ -87,6 +87,20 @@ class ExplorationAgent:
                     action="back",
                     reason=f"Blocked by safety policy: {val_result.reason}",
                 )
+
+            # Loop prevention: detect if chosen element was already attempted on this screen
+            target_el_id = None
+            if action_decision.target is not None:
+                if hasattr(action_decision.target, "element_id"):
+                    target_el_id = action_decision.target.element_id
+                elif isinstance(action_decision.target, dict):
+                    target_el_id = action_decision.target.get("element_id")
+
+            if target_el_id and self.memory.is_element_attempted(screen_id, str(target_el_id)):
+                action_decision = AgentAction(
+                    action="back",
+                    reason=f"Loop prevention: element '{target_el_id}' already attempted on screen '{screen_id}'",
+                )
         else:
             action_decision = self.selector.select_action(
                 screen_id=screen_id,
