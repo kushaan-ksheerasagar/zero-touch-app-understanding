@@ -3,6 +3,7 @@ Agent package initialization.
 """
 
 from .agent import ExplorationAgent
+from .llm_reasoner import FakeLLMClient, LLMReasoner, build_reasoning_prompt
 from .memory import ExplorationMemory
 from .reasoning import (
     BaseReasoner,
@@ -42,4 +43,7 @@ __all__ = [
     "SafetyValidator",
     "ValidationResult",
     "validate_action",
+    "LLMReasoner",
+    "build_reasoning_prompt",
+    "FakeLLMClient",
 ]

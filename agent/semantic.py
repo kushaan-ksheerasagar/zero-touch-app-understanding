@@ -50,7 +50,9 @@ def classify_element_role(element: Dict[str, Any]) -> str:
     """
     Deterministically classifies a UI element into a controlled semantic role.
     """
-    raw_type = str(element.get("type", "") or "").strip()
+    raw_type = str(
+        element.get("type", "") or element.get("class_name", "") or ""
+    ).strip()
     type_lower = raw_type.lower()
     scrollable = bool(element.get("scrollable", False))
     clickable = bool(element.get("clickable", False))
