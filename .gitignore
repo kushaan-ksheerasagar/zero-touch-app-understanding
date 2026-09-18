@@ -20,3 +20,16 @@ Thumbs.db
 # Secrets & Environment
 .env
 *.env
+
+# Android / Gradle build artifacts
+.gradle/
+build/
+**/build/
+*.apk
+*.ap_
+*.aab
+*.dex
+*.class
+local.properties
+.cxx/
+
