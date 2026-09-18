@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background">
+
+    <!-- Top App Bar with Back Button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:background="@color/surface"
+        android:elevation="2dp">
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="← Back"
+            android:textColor="@color/primary"
+            android:background="@drawable/bg_chip"
+            android:contentDescription="@string/back_button_desc"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingHorizontal="12dp" />
+
+        <TextView
+            android:id="@+id/text_search_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/search_title"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:gravity="center"
+            android:layout_marginEnd="60dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Search Input and Action -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <EditText
+                android:id="@+id/input_search"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:hint="@string/search_hint"
+                android:inputType="text"
+                android:background="@drawable/bg_input"
+                android:paddingHorizontal="16dp"
+                android:textSize="15sp"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_muted"
+                android:layout_marginEnd="10dp" />
+
+            <Button
+                android:id="@+id/btn_do_search"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="@string/search_button"
+                android:textColor="@color/text_on_primary"
+                android:background="@drawable/bg_button"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingHorizontal="20dp" />
+        </LinearLayout>
+
+        <!-- Category Suggestion Chips -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/quick_suggestions"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="14dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+            <Button
+                android:id="@+id/chip_headphones"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Headphones"
+                android:textColor="@color/text_primary"
+                android:background="@drawable/bg_chip"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginEnd="10dp"
+                android:paddingHorizontal="14dp" />
+
+            <Button
+                android:id="@+id/chip_watches"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Smart Watches"
+                android:textColor="@color/text_primary"
+                android:background="@drawable/bg_chip"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingHorizontal="14dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/chip_keyboards"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Keyboards"
+                android:textColor="@color/text_primary"
+                android:background="@drawable/bg_chip"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginEnd="10dp"
+                android:paddingHorizontal="14dp" />
+
+            <Button
+                android:id="@+id/chip_monitors"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Monitors"
+                android:textColor="@color/text_primary"
+                android:background="@drawable/bg_chip"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingHorizontal="14dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

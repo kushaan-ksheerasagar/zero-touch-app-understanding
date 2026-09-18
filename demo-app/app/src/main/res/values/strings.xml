@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ZeroTouch Demo</string>
+    
+    <!-- Login Screen -->
+    <string name="login_title">ZeroTouch</string>
+    <string name="login_subtitle">Demo environment</string>
+    <string name="login_prompt">Enter credentials to begin exploration</string>
+    <string name="email_hint">Email address</string>
+    <string name="password_hint">Password</string>
+    <string name="login_button">Login</string>
+    
+    <!-- Home Screen -->
+    <string name="home_welcome">Welcome to ZeroTouch</string>
+    <string name="home_subtitle">Explore products &amp; discover categories</string>
+    <string name="search_bar_hint">Search products...</string>
+    <string name="featured_products_heading">Featured Products</string>
+    <string name="profile_button_desc">User profile</string>
+    
+    <!-- Search Screen -->
+    <string name="search_title">Search</string>
+    <string name="search_hint">Type product or brand...</string>
+    <string name="search_button">Search</string>
+    <string name="quick_suggestions">Popular Categories</string>
+    
+    <!-- Results Screen -->
+    <string name="results_title">Search Results</string>
+    <string name="filter_sort_desc">Filters &amp; sorting</string>
+    
+    <!-- Product Screen -->
+    <string name="product_details">Product Details</string>
+    <string name="specifications_heading">Key Specifications</string>
+    <string name="back_button_desc">Navigate back</string>
+    
+    <!-- Profile Screen -->
+    <string name="profile_title">Profile</string>
+    <string name="profile_name">Alex Mercer</string>
+    <string name="profile_email">alex.mercer@example.com</string>
+    <string name="profile_role">Verified Explorer</string>
+</resources>

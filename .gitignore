@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Test/runtime artifacts
+artifacts/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Secrets & Environment
+.env
+*.env
+
+# Android / Gradle build artifacts
+.gradle/
+build/
+**/build/
+*.apk
+*.ap_
+*.aab
+*.dex
+*.class
+local.properties
+.cxx/
+
