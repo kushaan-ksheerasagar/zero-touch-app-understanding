@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background">
+
+    <!-- Top App Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="20dp"
+        android:background="@color/surface"
+        android:elevation="3dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_home_welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_welcome"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_subtitle"
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Profile"
+            android:textColor="@color/primary"
+            android:background="@drawable/bg_chip"
+            android:contentDescription="@string/profile_button_desc"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingHorizontal="14dp" />
+    </LinearLayout>
+
+    <!-- Search Entry Container -->
+    <LinearLayout
+        android:id="@+id/btn_search"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_card"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:paddingHorizontal="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="Search products button">
+
+        <TextView
+            android:id="@+id/text_search_placeholder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/search_bar_hint"
+            android:textSize="15sp"
+            android:textColor="@color/text_muted" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            android:textColor="@color/primary"
+            android:textStyle="bold"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- Main Scrollable Content -->
+    <ScrollView
+        android:id="@+id/home_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="32dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/featured_products_heading"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Product Card 1 -->
+            <LinearLayout
+                android:id="@+id/card_product_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_card"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/text_product_title_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wireless Headphones"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="High-fidelity audio with active noise cancellation."
+                    android:textSize="13sp"
+                    android:textColor="@color/text_secondary"
+                    android:layout_marginTop="4dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="$129.99"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View Details →"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/accent" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Product Card 2 -->
+            <LinearLayout
+                android:id="@+id/card_product_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_card"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/text_product_title_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Smart Watch Pro"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fitness tracking, heart monitor, and AMOLED display."
+                    android:textSize="13sp"
+                    android:textColor="@color/text_secondary"
+                    android:layout_marginTop="4dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="$249.99"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View Details →"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/accent" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Product Card 3 -->
+            <LinearLayout
+                android:id="@+id/card_product_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_card"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/text_product_title_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Noise Cancelling Earbuds"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pocket-sized wireless earbuds with 30-hour battery life."
+                    android:textSize="13sp"
+                    android:textColor="@color/text_secondary"
+                    android:layout_marginTop="4dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="$89.99"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View Details →"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/accent" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Product Card 4 -->
+            <LinearLayout
+                android:id="@+id/card_product_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_card"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/text_product_title_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mechanical Keyboard"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Custom hot-swappable tactile switches and RGB lighting."
+                    android:textSize="13sp"
+                    android:textColor="@color/text_secondary"
+                    android:layout_marginTop="4dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="$119.50"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View Details →"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/accent" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Product Card 5 -->
+            <LinearLayout
+                android:id="@+id/card_product_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_card"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/text_product_title_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ultra-wide Gaming Monitor"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="34-inch curved display with 144Hz refresh rate."
+                    android:textSize="13sp"
+                    android:textColor="@color/text_secondary"
+                    android:layout_marginTop="4dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="$499.00"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View Details →"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/accent" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Product Card 6 -->
+            <LinearLayout
+                android:id="@+id/card_product_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_card"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/text_product_title_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Portable Bluetooth Speaker"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="360-degree immersive stereo sound with IPX7 waterproofing."
+                    android:textSize="13sp"
+                    android:textColor="@color/text_secondary"
+                    android:layout_marginTop="4dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="$79.99"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View Details →"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/accent" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Product Card 7 -->
+            <LinearLayout
+                android:id="@+id/card_product_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_card"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/text_product_title_7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fast Wireless Charging Stand"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15W Qi-certified rapid inductive charging dock for phone and buds."
+                    android:textSize="13sp"
+                    android:textColor="@color/text_secondary"
+                    android:layout_marginTop="4dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="$39.99"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View Details →"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/accent" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Product Card 8 -->
+            <LinearLayout
+                android:id="@+id/card_product_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_card"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/text_product_title_8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ergonomic Desk Chair"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Breathable mesh back with adjustable lumbar support and headrest."
+                    android:textSize="13sp"
+                    android:textColor="@color/text_secondary"
+                    android:layout_marginTop="4dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="$329.00"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View Details →"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/accent" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

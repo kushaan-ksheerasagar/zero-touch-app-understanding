@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<hierarchy rotation="0">
+  <node index="0" text="" resource-id="" class="android.widget.FrameLayout" package="com.example.shop" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[0,0][1080,1920]">
+    <node index="0" text="" resource-id="android:id/content" class="android.widget.FrameLayout" package="com.example.shop" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[0,0][1080,1920]">
+      <node index="0" text="" resource-id="" class="android.widget.LinearLayout" package="com.example.shop" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[0,0][1080,1920]">
+        
+        <!-- Top Toolbar -->
+        <node index="0" text="" resource-id="com.example.shop:id/toolbar" class="androidx.appcompat.widget.Toolbar" package="com.example.shop" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[0,70][1080,210]">
+          <node index="0" text="Explore Store" resource-id="com.example.shop:id/toolbar_title" class="android.widget.TextView" package="com.example.shop" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[48,105][420,175]" />
+          <node index="1" text="" resource-id="com.example.shop:id/btn_search" class="android.widget.ImageButton" package="com.example.shop" content-desc="Search Store" checkable="false" checked="false" clickable="true" enabled="true" focusable="true" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[940,90][1040,190]" />
+        </node>
+
+        <!-- Main Content Area -->
+        <node index="1" text="" resource-id="com.example.shop:id/content_container" class="android.widget.RelativeLayout" package="com.example.shop" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[0,210][1080,1760]">
+          
+          <!-- Login/Search Form Section -->
+          <node index="0" text="Welcome back" resource-id="com.example.shop:id/welcome_text" class="android.widget.TextView" package="com.example.shop" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[48,240][600,310]" />
+          
+          <node index="1" text="" resource-id="com.example.shop:id/input_email" class="android.widget.EditText" package="com.example.shop" content-desc="Email address" checkable="false" checked="false" clickable="true" enabled="true" focusable="true" focused="false" scrollable="false" long-clickable="true" password="false" selected="false" bounds="[48,340][1032,460]" />
+          
+          <node index="2" text="" resource-id="com.example.shop:id/input_password" class="android.widget.EditText" package="com.example.shop" content-desc="Password" checkable="false" checked="false" clickable="true" enabled="true" focusable="true" focused="false" scrollable="false" long-clickable="true" password="true" selected="false" bounds="[48,490][1032,610]" />
+          
+          <node index="3" text="Sign In" resource-id="com.example.shop:id/btn_signin" class="android.widget.Button" package="com.example.shop" content-desc="" checkable="false" checked="false" clickable="true" enabled="true" focusable="true" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[48,640][1032,760]" />
+
+          <!-- Product Feed List -->
+          <node index="4" text="" resource-id="com.example.shop:id/product_recycler_view" class="androidx.recyclerview.widget.RecyclerView" package="com.example.shop" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="true" long-clickable="false" password="false" selected="false" bounds="[0,780][1080,1760]">
+            
+            <!-- Product Item 1 (With resource ID) -->
+            <node index="0" text="" resource-id="com.example.shop:id/product_card_1" class="android.view.ViewGroup" package="com.example.shop" content-desc="" checkable="false" checked="false" clickable="true" enabled="true" focusable="true" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[32,800][1048,1100]">
+              <node index="0" text="Wireless Noise Canceling Headphones" resource-id="com.example.shop:id/product_name" class="android.widget.TextView" package="com.example.shop" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[64,830][800,900]" />
+              <node index="1" text="$199.99" resource-id="com.example.shop:id/product_price" class="android.widget.TextView" package="com.example.shop" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[64,920][300,980]" />
+              <node index="2" text="" resource-id="" class="android.widget.ImageButton" package="com.example.shop" content-desc="Add to Cart" checkable="false" checked="false" clickable="true" enabled="true" focusable="true" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[900,910][1000,1010]" />
+            </node>
+
+            <!-- Product Item 2 (Without resource ID) -->
+            <node index="1" text="" resource-id="" class="android.view.ViewGroup" package="com.example.shop" content-desc="" checkable="false" checked="false" clickable="true" enabled="true" focusable="true" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[32,1120][1048,1420]">
+              <node index="0" text="Smart Fitness Watch" resource-id="" class="android.widget.TextView" package="com.example.shop" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[64,1150][800,1220]" />
+              <node index="1" text="$149.50" resource-id="" class="android.widget.TextView" package="com.example.shop" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[64,1240][300,1300]" />
+              <node index="2" text="" resource-id="" class="android.widget.ImageButton" package="com.example.shop" content-desc="Add to Cart" checkable="false" checked="false" clickable="true" enabled="false" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[900,1230][1000,1330]" />
+            </node>
+
+          </node>
+        </node>
+
+        <!-- Bottom Navigation Bar -->
+        <node index="2" text="" resource-id="com.example.shop:id/bottom_navigation" class="android.widget.LinearLayout" package="com.example.shop" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[0,1760][1080,1920]">
+          <node index="0" text="Home" resource-id="com.example.shop:id/nav_home" class="android.widget.TextView" package="com.example.shop" content-desc="Navigate to Home" checkable="false" checked="false" clickable="true" enabled="true" focusable="true" focused="false" scrollable="false" long-clickable="false" password="false" selected="true" bounds="[0,1760][360,1920]" />
+          <node index="1" text="Search" resource-id="com.example.shop:id/nav_search" class="android.widget.TextView" package="com.example.shop" content-desc="Navigate to Search" checkable="false" checked="false" clickable="true" enabled="true" focusable="true" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[360,1760][720,1920]" />
+          <node index="2" text="Profile" resource-id="com.example.shop:id/nav_profile" class="android.widget.TextView" package="com.example.shop" content-desc="Navigate to Profile" checkable="false" checked="false" clickable="true" enabled="true" focusable="true" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[720,1760][1080,1920]" />
+        </node>
+
+      </node>
+    </node>
+  </node>
+</hierarchy>

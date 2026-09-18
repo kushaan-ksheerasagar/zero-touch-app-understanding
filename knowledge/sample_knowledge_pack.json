@@ -1,0 +1,787 @@
+{
+  "app_name": "ZeroShop Mobile",
+  "package_name": "com.example.shop",
+  "version": "1.0",
+  "exploration_status": "completed",
+  "created_at": 1773792000.0,
+  "updated_at": 1773795600.0,
+  "design_system": {
+    "theme": "dark",
+    "primary_color": "#6366f1",
+    "background_color": "#0b0f19",
+    "surface_color": "#1e293b",
+    "accent_color": "#38bdf8",
+    "text_primary": "#f8fafc",
+    "text_secondary": "#94a3b8",
+    "border_radius": "12px",
+    "font_family": "Inter, -apple-system, sans-serif"
+  },
+  "metadata": {
+    "explored_by": "Zero-Touch Autonomous Explorer",
+    "total_actions_executed": 24,
+    "exploration_duration_seconds": 182.4
+  },
+  "screens": {
+    "screen_001": {
+      "screen_id": "screen_001",
+      "name": "Login",
+      "purpose": "Authenticates returning users with email and password credentials.",
+      "activity_name": "com.example.shop/.LoginActivity",
+      "screenshot_path": "screenshots/screen_001_login.png",
+      "design": {
+        "layout_type": "vertical_form",
+        "has_toolbar": false
+      },
+      "elements": [
+        {
+          "element_id": "com.example.shop:id/app_logo",
+          "type": "android.widget.ImageView",
+          "text": "",
+          "content_description": "ZeroShop Logo",
+          "bounds": [440, 160, 640, 360],
+          "center": [540, 260],
+          "clickable": false,
+          "scrollable": false,
+          "focusable": false,
+          "enabled": true,
+          "purpose": "Brand identification logo"
+        },
+        {
+          "element_id": "com.example.shop:id/title_login",
+          "type": "android.widget.TextView",
+          "text": "Sign In to ZeroShop",
+          "content_description": "",
+          "bounds": [80, 390, 1000, 460],
+          "center": [540, 425],
+          "clickable": false,
+          "scrollable": false,
+          "focusable": false,
+          "enabled": true,
+          "purpose": "Login screen header"
+        },
+        {
+          "element_id": "com.example.shop:id/input_email",
+          "type": "android.widget.EditText",
+          "text": "",
+          "content_description": "Email address",
+          "bounds": [80, 500, 1000, 620],
+          "center": [540, 560],
+          "clickable": true,
+          "scrollable": false,
+          "focusable": true,
+          "enabled": true,
+          "purpose": "Email entry input field"
+        },
+        {
+          "element_id": "com.example.shop:id/input_password",
+          "type": "android.widget.EditText",
+          "text": "",
+          "content_description": "Password",
+          "bounds": [80, 650, 1000, 770],
+          "center": [540, 710],
+          "clickable": true,
+          "scrollable": false,
+          "focusable": true,
+          "enabled": true,
+          "purpose": "Password entry input field"
+        },
+        {
+          "element_id": "com.example.shop:id/btn_login",
+          "type": "android.widget.Button",
+          "text": "Continue",
+          "content_description": "",
+          "bounds": [80, 810, 1000, 930],
+          "center": [540, 870],
+          "clickable": true,
+          "scrollable": false,
+          "focusable": true,
+          "enabled": true,
+          "purpose": "Submits credentials and transitions to Home screen"
+        },
+        {
+          "element_id": "com.example.shop:id/link_forgot_pwd",
+          "type": "android.widget.TextView",
+          "text": "Forgot password?",
+          "content_description": "Reset password link",
+          "bounds": [360, 960, 720, 1020],
+          "center": [540, 990],
+          "clickable": true,
+          "scrollable": false,
+          "focusable": false,
+          "enabled": true,
+          "purpose": "Opens password recovery flow"
+        }
+      ],
+      "actions": [
+        {
+          "action_id": "act_login_continue",
+          "action_type": "tap",
+          "target_element_id": "com.example.shop:id/btn_login",
+          "parameters": {},
+          "description": "Tap Continue button to sign in"
+        }
+      ]
+    },
+    "screen_002": {
+      "screen_id": "screen_002",
+      "name": "Home",
+      "purpose": "Main marketplace discovery hub featuring featured drops and product catalog.",
+      "activity_name": "com.example.shop/.MainActivity",
+      "screenshot_path": "screenshots/screen_002_home.png",
+      "design": {
+        "layout_type": "scrollable_feed",
+        "has_toolbar": true
+      },
+      "elements": [
+        {
+          "element_id": "com.example.shop:id/toolbar_title",
+          "type": "android.widget.TextView",
+          "text": "ZeroShop",
+          "content_description": "",
+          "bounds": [48, 80, 420, 160],
+          "center": [234, 120],
+          "clickable": false,
+          "scrollable": false,
+          "focusable": false,
+          "enabled": true,
+          "purpose": "Toolbar title"
+        },
+        {
+          "element_id": "com.example.shop:id/btn_search",
+          "type": "android.widget.ImageButton",
+          "text": "",
+          "content_description": "Search products",
+          "bounds": [920, 80, 1032, 160],
+          "center": [976, 120],
+          "clickable": true,
+          "scrollable": false,
+          "focusable": true,
+          "enabled": true,
+          "purpose": "Opens dedicated product search view"
+        },
+        {
+          "element_id": "com.example.shop:id/hero_banner",
+          "type": "android.widget.ImageView",
+          "text": "",
+          "content_description": "New Season Tech Arrivals",
+          "bounds": [48, 190, 1032, 520],
+          "center": [540, 355],
+          "clickable": true,
+          "scrollable": false,
+          "focusable": false,
+          "enabled": true,
+          "purpose": "Promotional banner card"
+        },
+        {
+          "element_id": "com.example.shop:id/section_featured",
+          "type": "android.widget.TextView",
+          "text": "Trending Products",
+          "content_description": "",
+          "bounds": [48, 550, 600, 620],
+          "center": [324, 585],
+          "clickable": false,
+          "scrollable": false,
+          "focusable": false,
+          "enabled": true,
+          "purpose": "Section header"
+        },
+        {
+          "element_id": "com.example.shop:id/product_card_1",
+          "type": "androidx.cardview.widget.CardView",
+          "text": "",
+          "content_description": "Pro Wireless Headphones",
+          "bounds": [48, 640, 1032, 940],
+          "center": [540, 790],
+          "clickable": true,
+          "scrollable": false,
+          "focusable": true,
+          "enabled": true,
+          "purpose": "Product card item"
+        },
+        {
+          "element_id": "com.example.shop:id/product_title_1",
+          "type": "android.widget.TextView",
+          "text": "Pro Wireless Headphones",
+          "content_description": "",
+          "bounds": [80, 800, 750, 860],
+          "center": [415, 830],
+          "clickable": false,
+          "scrollable": false,
+          "focusable": false,
+          "enabled": true,
+          "purpose": "Product name"
+        },
+        {
+          "element_id": "com.example.shop:id/product_price_1",
+          "type": "android.widget.TextView",
+          "text": "$199.99",
+          "content_description": "",
+          "bounds": [80, 870, 300, 920],
+          "center": [190, 895],
+          "clickable": false,
+          "scrollable": false,
+          "focusable": false,
+          "enabled": true,
+          "purpose": "Product price"
+        },
+        {
+          "element_id": "com.example.shop:id/nav_home",
+          "type": "android.widget.TextView",
+          "text": "Home",
+          "content_description": "Home tab",
+          "bounds": [0, 1780, 360, 1920],
+          "center": [180, 1850],
+          "clickable": true,
+          "scrollable": false,
+          "focusable": true,
+          "enabled": true,
+          "purpose": "Bottom nav home tab"
+        },
+        {
+          "element_id": "com.example.shop:id/nav_search",
+          "type": "android.widget.TextView",
+          "text": "Search",
+          "content_description": "Search tab",
+          "bounds": [360, 1780, 720, 1920],
+          "center": [540, 1850],
+          "clickable": true,
+          "scrollable": false,
+          "focusable": true,
+          "enabled": true,
+          "purpose": "Bottom nav search tab"
+        },
+        {
+          "element_id": "com.example.shop:id/nav_profile",
+          "type": "android.widget.TextView",
+          "text": "Profile",
+          "content_description": "Profile tab",
+          "bounds": [720, 1780, 1080, 1920],
+          "center": [900, 1850],
+          "clickable": true,
+          "scrollable": false,
+          "focusable": true,
+          "enabled": true,
+          "purpose": "Bottom nav profile tab"
+        }
+      ],
+      "actions": [
+        {
+          "action_id": "act_home_tap_search",
+          "action_type": "tap",
+          "target_element_id": "com.example.shop:id/btn_search",
+          "parameters": {},
+          "description": "Tap search button in toolbar"
+        },
+        {
+          "action_id": "act_home_tap_profile",
+          "action_type": "tap",
+          "target_element_id": "com.example.shop:id/nav_profile",
+          "parameters": {},
+          "description": "Tap Profile tab in bottom navigation"
+        }
+      ]
+    },
+    "screen_003": {
+      "screen_id": "screen_003",
+      "name": "Search",
+      "purpose": "Real-time search interface with query bar, category filters, and product results.",
+      "activity_name": "com.example.shop/.SearchActivity",
+      "screenshot_path": "screenshots/screen_003_search.png",
+      "design": {
+        "layout_type": "search_results",
+        "has_toolbar": true
+      },
+      "elements": [
+        {
+          "element_id": "com.example.shop:id/btn_back_search",
+          "type": "android.widget.ImageButton",
+          "text": "",
+          "content_description": "Navigate back",
+          "bounds": [32, 70, 120, 160],
+          "center": [76, 115],
+          "clickable": true,
+          "scrollable": false,
+          "focusable": true,
+          "enabled": true,
+          "purpose": "Returns to previous screen"
+        },
+        {
+          "element_id": "com.example.shop:id/input_search_query",
+          "type": "android.widget.EditText",
+          "text": "Headphones",
+          "content_description": "Search products",
+          "bounds": [140, 70, 1032, 160],
+          "center": [586, 115],
+          "clickable": true,
+          "scrollable": false,
+          "focusable": true,
+          "enabled": true,
+          "purpose": "Text query input"
+        },
+        {
+          "element_id": "com.example.shop:id/chip_audio",
+          "type": "android.widget.Button",
+          "text": "Audio",
+          "content_description": "Filter by Audio",
+          "bounds": [48, 180, 240, 250],
+          "center": [144, 215],
+          "clickable": true,
+          "scrollable": false,
+          "focusable": true,
+          "enabled": true,
+          "purpose": "Category filter pill"
+        },
+        {
+          "element_id": "com.example.shop:id/search_result_1",
+          "type": "android.view.ViewGroup",
+          "text": "",
+          "content_description": "Noise-Canceling Pro Headset",
+          "bounds": [48, 280, 1032, 540],
+          "center": [540, 410],
+          "clickable": true,
+          "scrollable": false,
+          "focusable": true,
+          "enabled": true,
+          "purpose": "Search result card"
+        },
+        {
+          "element_id": "com.example.shop:id/result_title_1",
+          "type": "android.widget.TextView",
+          "text": "Noise-Canceling Pro Headset",
+          "content_description": "",
+          "bounds": [280, 310, 980, 380],
+          "center": [630, 345],
+          "clickable": false,
+          "scrollable": false,
+          "focusable": false,
+          "enabled": true,
+          "purpose": "Result item name"
+        },
+        {
+          "element_id": "com.example.shop:id/result_price_1",
+          "type": "android.widget.TextView",
+          "text": "$149.00",
+          "content_description": "",
+          "bounds": [280, 400, 500, 460],
+          "center": [390, 430],
+          "clickable": false,
+          "scrollable": false,
+          "focusable": false,
+          "enabled": true,
+          "purpose": "Result item price"
+        }
+      ],
+      "actions": [
+        {
+          "action_id": "act_search_pick_product",
+          "action_type": "tap",
+          "target_element_id": "com.example.shop:id/search_result_1",
+          "parameters": {},
+          "description": "Tap product result to view details"
+        },
+        {
+          "action_id": "act_search_back",
+          "action_type": "back",
+          "target_element_id": null,
+          "parameters": {},
+          "description": "Press back to return to Home"
+        }
+      ]
+    },
+    "screen_004": {
+      "screen_id": "screen_004",
+      "name": "Product Details",
+      "purpose": "Detailed product presentation with high-res imagery, specifications, and purchase CTA.",
+      "activity_name": "com.example.shop/.ProductDetailActivity",
+      "screenshot_path": "screenshots/screen_004_product.png",
+      "design": {
+        "layout_type": "detail_view",
+        "has_toolbar": true
+      },
+      "elements": [
+        {
+          "element_id": "com.example.shop:id/btn_back_detail",
+          "type": "android.widget.ImageButton",
+          "text": "",
+          "content_description": "Back",
+          "bounds": [32, 70, 120, 160],
+          "center": [76, 115],
+          "clickable": true,
+          "scrollable": false,
+          "focusable": true,
+          "enabled": true,
+          "purpose": "Returns to previous search list"
+        },
+        {
+          "element_id": "com.example.shop:id/product_hero_img",
+          "type": "android.widget.ImageView",
+          "text": "",
+          "content_description": "Photo of Noise-Canceling Pro Headset",
+          "bounds": [48, 180, 1032, 780],
+          "center": [540, 480],
+          "clickable": false,
+          "scrollable": false,
+          "focusable": false,
+          "enabled": true,
+          "purpose": "Product image presentation"
+        },
+        {
+          "element_id": "com.example.shop:id/detail_title",
+          "type": "android.widget.TextView",
+          "text": "Noise-Canceling Pro Headset",
+          "content_description": "",
+          "bounds": [48, 810, 1000, 880],
+          "center": [524, 845],
+          "clickable": false,
+          "scrollable": false,
+          "focusable": false,
+          "enabled": true,
+          "purpose": "Product heading"
+        },
+        {
+          "element_id": "com.example.shop:id/detail_rating",
+          "type": "android.widget.TextView",
+          "text": "4.9 (2,410 customer reviews)",
+          "content_description": "Rating score",
+          "bounds": [48, 890, 560, 940],
+          "center": [304, 915],
+          "clickable": false,
+          "scrollable": false,
+          "focusable": false,
+          "enabled": true,
+          "purpose": "Product review summary"
+        },
+        {
+          "element_id": "com.example.shop:id/detail_price",
+          "type": "android.widget.TextView",
+          "text": "$149.00",
+          "content_description": "Price",
+          "bounds": [48, 960, 320, 1030],
+          "center": [184, 995],
+          "clickable": false,
+          "scrollable": false,
+          "focusable": false,
+          "enabled": true,
+          "purpose": "Product purchase price"
+        },
+        {
+          "element_id": "com.example.shop:id/detail_desc",
+          "type": "android.widget.TextView",
+          "text": "Engineered for immersive studio-grade sound with adaptive hybrid ANC and 45h runtime.",
+          "content_description": "",
+          "bounds": [48, 1050, 1032, 1200],
+          "center": [540, 1125],
+          "clickable": false,
+          "scrollable": false,
+          "focusable": false,
+          "enabled": true,
+          "purpose": "Product description text"
+        },
+        {
+          "element_id": "com.example.shop:id/btn_add_cart",
+          "type": "android.widget.Button",
+          "text": "Add to Cart - $149.00",
+          "content_description": "",
+          "bounds": [48, 1740, 1032, 1870],
+          "center": [540, 1805],
+          "clickable": true,
+          "scrollable": false,
+          "focusable": true,
+          "enabled": true,
+          "purpose": "Primary checkout / cart addition button"
+        }
+      ],
+      "actions": [
+        {
+          "action_id": "act_product_back_action",
+          "action_type": "back",
+          "target_element_id": null,
+          "parameters": {},
+          "description": "Press Back to return to Search"
+        }
+      ]
+    },
+    "screen_005": {
+      "screen_id": "screen_005",
+      "name": "Profile",
+      "purpose": "User management screen displaying account info, past orders, and application settings.",
+      "activity_name": "com.example.shop/.ProfileActivity",
+      "screenshot_path": "screenshots/screen_005_profile.png",
+      "design": {
+        "layout_type": "profile_menu",
+        "has_toolbar": true
+      },
+      "elements": [
+        {
+          "element_id": "com.example.shop:id/profile_avatar",
+          "type": "android.widget.ImageView",
+          "text": "",
+          "content_description": "User avatar photo",
+          "bounds": [440, 140, 640, 340],
+          "center": [540, 240],
+          "clickable": false,
+          "scrollable": false,
+          "focusable": false,
+          "enabled": true,
+          "purpose": "User profile avatar"
+        },
+        {
+          "element_id": "com.example.shop:id/user_name",
+          "type": "android.widget.TextView",
+          "text": "Alex Mercer",
+          "content_description": "",
+          "bounds": [80, 370, 1000, 440],
+          "center": [540, 405],
+          "clickable": false,
+          "scrollable": false,
+          "focusable": false,
+          "enabled": true,
+          "purpose": "Display name"
+        },
+        {
+          "element_id": "com.example.shop:id/user_email",
+          "type": "android.widget.TextView",
+          "text": "alex.mercer@example.com",
+          "content_description": "",
+          "bounds": [80, 450, 1000, 510],
+          "center": [540, 480],
+          "clickable": false,
+          "scrollable": false,
+          "focusable": false,
+          "enabled": true,
+          "purpose": "Account email"
+        },
+        {
+          "element_id": "com.example.shop:id/menu_orders",
+          "type": "android.widget.TextView",
+          "text": "Order History",
+          "content_description": "View past orders",
+          "bounds": [60, 560, 1020, 660],
+          "center": [540, 610],
+          "clickable": true,
+          "scrollable": false,
+          "focusable": true,
+          "enabled": true,
+          "purpose": "Orders navigation item"
+        },
+        {
+          "element_id": "com.example.shop:id/menu_settings",
+          "type": "android.widget.TextView",
+          "text": "Preferences & Security",
+          "content_description": "Settings",
+          "bounds": [60, 680, 1020, 780],
+          "center": [540, 730],
+          "clickable": true,
+          "scrollable": false,
+          "focusable": true,
+          "enabled": true,
+          "purpose": "Settings menu item"
+        },
+        {
+          "element_id": "com.example.shop:id/btn_logout",
+          "type": "android.widget.Button",
+          "text": "Sign Out",
+          "content_description": "Log out from application",
+          "bounds": [60, 840, 1020, 950],
+          "center": [540, 895],
+          "clickable": true,
+          "scrollable": false,
+          "focusable": true,
+          "enabled": true,
+          "purpose": "Terminates user session"
+        },
+        {
+          "element_id": "com.example.shop:id/nav_home_from_profile",
+          "type": "android.widget.TextView",
+          "text": "Home",
+          "content_description": "Navigate to Home",
+          "bounds": [0, 1780, 360, 1920],
+          "center": [180, 1850],
+          "clickable": true,
+          "scrollable": false,
+          "focusable": true,
+          "enabled": true,
+          "purpose": "Bottom nav home tab"
+        }
+      ],
+      "actions": [
+        {
+          "action_id": "act_profile_tap_home",
+          "action_type": "tap",
+          "target_element_id": "com.example.shop:id/nav_home_from_profile",
+          "parameters": {},
+          "description": "Tap Home tab in bottom navigation"
+        }
+      ]
+    }
+  },
+  "transitions": [
+    {
+      "transition_id": "trans_001",
+      "source_screen_id": "screen_001",
+      "action": {
+        "action_id": "act_login_continue",
+        "action_type": "tap",
+        "target_element_id": "com.example.shop:id/btn_login",
+        "parameters": {},
+        "description": "Tap Continue button to sign in"
+      },
+      "destination_screen_id": "screen_002",
+      "status": "success",
+      "timestamp": 1773792040.0
+    },
+    {
+      "transition_id": "trans_002",
+      "source_screen_id": "screen_002",
+      "action": {
+        "action_id": "act_home_tap_search",
+        "action_type": "tap",
+        "target_element_id": "com.example.shop:id/btn_search",
+        "parameters": {},
+        "description": "Tap search button in toolbar"
+      },
+      "destination_screen_id": "screen_003",
+      "status": "success",
+      "timestamp": 1773792110.0
+    },
+    {
+      "transition_id": "trans_003",
+      "source_screen_id": "screen_003",
+      "action": {
+        "action_id": "act_search_pick_product",
+        "action_type": "tap",
+        "target_element_id": "com.example.shop:id/search_result_1",
+        "parameters": {},
+        "description": "Tap product result to view details"
+      },
+      "destination_screen_id": "screen_004",
+      "status": "success",
+      "timestamp": 1773792180.0
+    },
+    {
+      "transition_id": "trans_004",
+      "source_screen_id": "screen_004",
+      "action": {
+        "action_id": "act_product_back_action",
+        "action_type": "back",
+        "target_element_id": null,
+        "parameters": {},
+        "description": "Press Back to return to Search"
+      },
+      "destination_screen_id": "screen_003",
+      "status": "success",
+      "timestamp": 1773792240.0
+    },
+    {
+      "transition_id": "trans_005",
+      "source_screen_id": "screen_002",
+      "action": {
+        "action_id": "act_home_tap_profile",
+        "action_type": "tap",
+        "target_element_id": "com.example.shop:id/nav_profile",
+        "parameters": {},
+        "description": "Tap Profile tab in bottom navigation"
+      },
+      "destination_screen_id": "screen_005",
+      "status": "success",
+      "timestamp": 1773792320.0
+    },
+    {
+      "transition_id": "trans_006",
+      "source_screen_id": "screen_005",
+      "action": {
+        "action_id": "act_profile_tap_home",
+        "action_type": "tap",
+        "target_element_id": "com.example.shop:id/nav_home_from_profile",
+        "parameters": {},
+        "description": "Tap Home tab in bottom navigation"
+      },
+      "destination_screen_id": "screen_002",
+      "status": "success",
+      "timestamp": 1773792400.0
+    }
+  ],
+  "navigation_graph": {
+    "nodes": [
+      {
+        "id": "screen_001",
+        "label": "Login",
+        "activity": "com.example.shop/.LoginActivity",
+        "element_count": 6,
+        "is_root": true
+      },
+      {
+        "id": "screen_002",
+        "label": "Home",
+        "activity": "com.example.shop/.MainActivity",
+        "element_count": 10,
+        "is_root": false
+      },
+      {
+        "id": "screen_003",
+        "label": "Search",
+        "activity": "com.example.shop/.SearchActivity",
+        "element_count": 6,
+        "is_root": false
+      },
+      {
+        "id": "screen_004",
+        "label": "Product Details",
+        "activity": "com.example.shop/.ProductDetailActivity",
+        "element_count": 7,
+        "is_root": false
+      },
+      {
+        "id": "screen_005",
+        "label": "Profile",
+        "activity": "com.example.shop/.ProfileActivity",
+        "element_count": 7,
+        "is_root": false
+      }
+    ],
+    "edges": [
+      {
+        "id": "trans_001",
+        "source": "screen_001",
+        "target": "screen_002",
+        "label": "tap: com.example.shop:id/btn_login",
+        "action_type": "tap"
+      },
+      {
+        "id": "trans_002",
+        "source": "screen_002",
+        "target": "screen_003",
+        "label": "tap: com.example.shop:id/btn_search",
+        "action_type": "tap"
+      },
+      {
+        "id": "trans_003",
+        "source": "screen_003",
+        "target": "screen_004",
+        "label": "tap: com.example.shop:id/search_result_1",
+        "action_type": "tap"
+      },
+      {
+        "id": "trans_004",
+        "source": "screen_004",
+        "target": "screen_003",
+        "label": "back",
+        "action_type": "back"
+      },
+      {
+        "id": "trans_005",
+        "source": "screen_002",
+        "target": "screen_005",
+        "label": "tap: com.example.shop:id/nav_profile",
+        "action_type": "tap"
+      },
+      {
+        "id": "trans_006",
+        "source": "screen_005",
+        "target": "screen_002",
+        "label": "tap: com.example.shop:id/nav_home_from_profile",
+        "action_type": "tap"
+      }
+    ]
+  }
+}
