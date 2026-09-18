@@ -29,7 +29,7 @@ try:
     from agent.agent import ExplorationAgent
     from agent.memory import ExplorationMemory
     from agent.safety import SafetyValidator
-    from agent.semantic import ScreenUnderstanding, analyze_screen
+    from agent.semantic import ScreenUnderstanding, analyze_screen, classify_element
     from agent.types import AgentAction
     from integration.adapters import (
         to_api_action,
@@ -43,7 +43,7 @@ except (ImportError, ValueError):
     from agent import ExplorationAgent
     from memory import ExplorationMemory
     from safety import SafetyValidator
-    from semantic import ScreenUnderstanding, analyze_screen
+    from semantic import ScreenUnderstanding, analyze_screen, classify_element
     from types import AgentAction
     from adapters import (
         to_api_action,
@@ -103,20 +103,17 @@ def _ingest_screen_to_knowledge(
     )
 
     elements: List[UIElementData] = []
-    understanding_elem_map: Dict[str, Dict[str, Any]] = {}
-    if understanding and hasattr(understanding, "elements"):
-        for ue in understanding.elements:
-            if isinstance(ue, dict) and ue.get("element_id"):
-                understanding_elem_map[ue["element_id"]] = ue
-
     for raw_elem in screen_state.get("elements", []):
-        el_id = str(raw_elem.get("element_id", ""))
-        matched_ue = understanding_elem_map.get(el_id, {})
-        role = matched_ue.get("role", "unknown")
-        label = matched_ue.get("label", "")
-        interaction = matched_ue.get("interaction", "none")
+        if not isinstance(raw_elem, dict):
+            continue
+
+        classified = classify_element(raw_elem)
+        role = str(classified.get("role", "unknown"))
+        label = str(classified.get("label", ""))
+        interaction = str(classified.get("interaction", "none"))
 
         purpose_str = f"role={role}; label={label}; interaction={interaction}"
+        el_id = str(raw_elem.get("element_id", ""))
         elem_data = UIElementData(
             element_id=el_id,
             type=str(raw_elem.get("type", "android.view.View")),

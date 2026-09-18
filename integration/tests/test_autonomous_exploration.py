@@ -339,8 +339,93 @@ class TestAutonomousExploration(unittest.TestCase):
             max_consecutive_backs=2,
         )
         summary = explorer.run()
-
         self.assertEqual(summary["termination_reason"], "max_consecutive_backs_reached")
+
+    # Requirement 12: Semantic consistency and transition integrity
+    def test_semantic_consistency_and_transitions_integrity(self) -> None:
+        """Verify generated Knowledge Pack has pure 1:1 element semantics and intact transitions."""
+        from knowledge.builder import validate_knowledge_pack
+
+        screen_with_shared_ids = {
+            "current_activity": "com.android.settings/.Settings",
+            "screenshot_path": "screenshots/settings.png",
+            "elements": [
+                {
+                    "element_id": "android:id/title",
+                    "type": "android.widget.TextView",
+                    "text": "Network & internet",
+                    "bounds": [100, 100, 600, 200],
+                },
+                {
+                    "element_id": "android:id/title",
+                    "type": "android.widget.TextView",
+                    "text": "Connected devices",
+                    "bounds": [100, 220, 600, 320],
+                },
+                {
+                    "element_id": "android:id/title",
+                    "type": "android.widget.TextView",
+                    "text": "Sound & vibration",
+                    "bounds": [100, 340, 600, 440],
+                },
+                {
+                    "element_id": "android:id/icon",
+                    "type": "android.widget.ImageView",
+                    "text": "",
+                    "content_description": "Search settings",
+                    "bounds": [900, 50, 1000, 150],
+                },
+            ],
+        }
+        screen_sub = {
+            "current_activity": "com.android.settings/.SubSettings",
+            "screenshot_path": "screenshots/sub.png",
+            "elements": [
+                {
+                    "element_id": "android:id/title",
+                    "type": "android.widget.TextView",
+                    "text": "Wi-Fi",
+                    "bounds": [100, 100, 600, 200],
+                }
+            ],
+        }
+
+        responses = [
+            {"action": "tap", "target": {"element_id": "android:id/title"}, "reason": "Open Network & internet"},
+        ]
+        explorer, _, _ = self._build_explorer(
+            screens=[screen_with_shared_ids, screen_sub],
+            responses=responses,
+            max_steps=1,
+        )
+        summary = explorer.run()
+
+        with open(self.artifacts_path, "r", encoding="utf-8") as f:
+            pack_data = json.load(f)
+
+        # Validate with comprehensive integrity validator
+        val_res = validate_knowledge_pack(pack_data)
+        self.assertTrue(val_res["valid"], f"Validation failed: {val_res}")
+        self.assertEqual(len(val_res["element_errors"]), 0)
+        self.assertEqual(len(val_res["transition_errors"]), 0)
+
+        # Check the elements of the first screen individually
+        root_screen = list(pack_data["screens"].values())[0]
+        elements = root_screen["elements"]
+        self.assertEqual(len(elements), 4)
+
+        # Verify exact 1:1 derived semantic labels
+        self.assertIn("label=Network & internet", elements[0]["purpose"])
+        self.assertIn("label=Connected devices", elements[1]["purpose"])
+        self.assertIn("label=Sound & vibration", elements[2]["purpose"])
+        self.assertIn("label=Search settings", elements[3]["purpose"])
+
+        # Verify transitions serialized at top-level and in navigation_graph
+        self.assertIn("transitions", pack_data)
+        self.assertEqual(len(pack_data["transitions"]), 1)
+        self.assertIn("transitions", pack_data["navigation_graph"])
+        self.assertEqual(len(pack_data["navigation_graph"]["transitions"]), 1)
+        self.assertEqual(pack_data["transitions"][0]["status"], "success")
 
 
 if __name__ == "__main__":

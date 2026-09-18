@@ -301,6 +301,120 @@ class TestSemanticUnderstanding(unittest.TestCase):
             action2.get("target", {}).get("element_id"),
         )
 
+    def test_semantic_consistency_network_and_internet(self) -> None:
+        """Regression: text 'Network & internet' must produce label 'Network & internet'."""
+        elem = {
+            "element_id": "android:id/title",
+            "type": "android.widget.TextView",
+            "text": "Network & internet",
+            "content_description": "",
+        }
+        res = classify_element(elem)
+        self.assertEqual(res["label"], "Network & internet")
+        self.assertEqual(res["role"], ElementRole.TEXT)
+
+    def test_semantic_consistency_connected_devices(self) -> None:
+        """Regression: text 'Connected devices' must produce label 'Connected devices'."""
+        elem = {
+            "element_id": "android:id/title",
+            "type": "android.widget.TextView",
+            "text": "Connected devices",
+            "content_description": "",
+        }
+        res = classify_element(elem)
+        self.assertEqual(res["label"], "Connected devices")
+        self.assertEqual(res["role"], ElementRole.TEXT)
+
+    def test_empty_text_uses_content_description(self) -> None:
+        """Regression: empty text + content_description must use the content description."""
+        elem = {
+            "element_id": "android:id/icon",
+            "type": "android.widget.ImageView",
+            "text": "",
+            "content_description": "Search settings",
+        }
+        res = classify_element(elem)
+        self.assertEqual(res["label"], "Search settings")
+
+        # When visible text is also present, visible text takes precedence
+        elem_with_both = {
+            "element_id": "android:id/button",
+            "type": "android.widget.Button",
+            "text": "Save",
+            "content_description": "Save current settings",
+            "clickable": True,
+        }
+        res_both = classify_element(elem_with_both)
+        self.assertEqual(res_both["label"], "Save")
+
+    def test_separate_elements_never_share_labels_accidentally(self) -> None:
+        """Regression: separate elements with the same element_id must never share labels."""
+        raw_elements = [
+            {
+                "element_id": "android:id/title",
+                "type": "android.widget.TextView",
+                "text": "Network & internet",
+                "content_description": "",
+            },
+            {
+                "element_id": "android:id/title",
+                "type": "android.widget.TextView",
+                "text": "Connected devices",
+                "content_description": "",
+            },
+            {
+                "element_id": "android:id/title",
+                "type": "android.widget.TextView",
+                "text": "Sound & vibration",
+                "content_description": "",
+            },
+        ]
+        screen = {
+            "screen_id": "settings_root",
+            "elements": raw_elements,
+        }
+        understanding = analyze_screen(screen)
+        labels = [e["label"] for e in understanding.elements]
+        self.assertEqual(labels, ["Network & internet", "Connected devices", "Sound & vibration"])
+        self.assertEqual(understanding.elements[0]["label"], "Network & internet")
+        self.assertEqual(understanding.elements[1]["label"], "Connected devices")
+        self.assertEqual(understanding.elements[2]["label"], "Sound & vibration")
+
+    def test_repeated_analysis_does_not_leak_semantic_state(self) -> None:
+        """Regression: repeated analysis of different screens must not leak semantic state."""
+        screen_1 = {
+            "screen_id": "screen_1",
+            "elements": [
+                {
+                    "element_id": "android:id/title",
+                    "type": "android.widget.TextView",
+                    "text": "Sound & vibration",
+                }
+            ],
+        }
+        screen_2 = {
+            "screen_id": "screen_2",
+            "elements": [
+                {
+                    "element_id": "android:id/title",
+                    "type": "android.widget.TextView",
+                    "text": "Network & internet",
+                }
+            ],
+        }
+
+        # Analyze screen 1
+        und_1 = analyze_screen(screen_1)
+        self.assertEqual(und_1.elements[0]["label"], "Sound & vibration")
+
+        # Analyze screen 2 immediately after
+        und_2 = analyze_screen(screen_2)
+        self.assertEqual(und_2.elements[0]["label"], "Network & internet")
+
+        # Check raw dicts were not mutated
+        self.assertNotIn("role", screen_1["elements"][0])
+        self.assertNotIn("role", screen_2["elements"][0])
+
 
 if __name__ == "__main__":
     unittest.main()

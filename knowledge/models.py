@@ -201,10 +201,17 @@ class NavigationGraphData:
     nodes: List[NavigationGraphNode] = field(default_factory=list)
     edges: List[NavigationGraphEdge] = field(default_factory=list)
 
+    @property
+    def transitions(self) -> List[NavigationGraphEdge]:
+        """Alias for edges representing transitions in the graph."""
+        return self.edges
+
     def to_dict(self) -> Dict[str, Any]:
+        edges_list = [e.to_dict() if isinstance(e, NavigationGraphEdge) else e for e in self.edges]
         return {
             "nodes": [n.to_dict() if isinstance(n, NavigationGraphNode) else n for n in self.nodes],
-            "edges": [e.to_dict() if isinstance(e, NavigationGraphEdge) else e for e in self.edges],
+            "edges": edges_list,
+            "transitions": edges_list,
         }
 
     @classmethod
@@ -213,9 +220,12 @@ class NavigationGraphData:
             n if isinstance(n, NavigationGraphNode) else NavigationGraphNode.from_dict(n)
             for n in data.get("nodes", [])
         ]
+        raw_edges = data.get("edges")
+        if raw_edges is None:
+            raw_edges = data.get("transitions", [])
         edges = [
             e if isinstance(e, NavigationGraphEdge) else NavigationGraphEdge.from_dict(e)
-            for e in data.get("edges", [])
+            for e in raw_edges
         ]
         return cls(nodes=nodes, edges=edges)
 

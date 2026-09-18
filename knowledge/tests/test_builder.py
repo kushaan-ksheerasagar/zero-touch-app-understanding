@@ -278,6 +278,109 @@ class TestKnowledgeBuilder(unittest.TestCase):
         validation_errors = loaded_builder.validate_graph()
         self.assertEqual(validation_errors, [])
 
+    def test_navigation_graph_transitions_serialization(self) -> None:
+        """Confirm transitions are accessible on navigation_graph and serialized in to_dict."""
+        self.builder.add_screen({"screen_id": "s1", "name": "Screen 1"})
+        self.builder.add_screen({"screen_id": "s2", "name": "Screen 2"})
+        self.builder.record_transition({
+            "transition_id": "t1",
+            "source_screen_id": "s1",
+            "destination_screen_id": "s2",
+            "action": {"action_id": "a1", "action_type": "tap"},
+            "status": "success",
+        })
+
+        graph = self.builder.pack.navigation_graph
+        # Property access
+        self.assertEqual(len(graph.transitions), 1)
+        self.assertEqual(graph.transitions[0].source, "s1")
+        self.assertEqual(graph.transitions[0].target, "s2")
+
+        # Serialized dict access
+        g_dict = graph.to_dict()
+        self.assertIn("transitions", g_dict)
+        self.assertIn("edges", g_dict)
+        self.assertEqual(len(g_dict["transitions"]), 1)
+        self.assertEqual(g_dict["transitions"][0]["source"], "s1")
+
+    def test_duplicate_element_ids_with_different_bounds_not_collapsed(self) -> None:
+        """Separate elements sharing element_id (e.g. android:id/title) are preserved."""
+        elem1 = UIElementData(
+            element_id="android:id/title",
+            type="android.widget.TextView",
+            text="Network & internet",
+            bounds=[0, 100, 500, 200],
+            purpose="role=text; label=Network & internet; interaction=none",
+        )
+        elem2 = UIElementData(
+            element_id="android:id/title",
+            type="android.widget.TextView",
+            text="Connected devices",
+            bounds=[0, 200, 500, 300],
+            purpose="role=text; label=Connected devices; interaction=none",
+        )
+        screen = ScreenData(
+            screen_id="s1",
+            name="Settings",
+            elements=[elem1, elem2],
+        )
+        self.builder.add_screen(screen)
+        retrieved = self.builder.get_screen("s1")
+        self.assertEqual(len(retrieved.elements), 2)
+        self.assertEqual(retrieved.elements[0].text, "Network & internet")
+        self.assertEqual(retrieved.elements[1].text, "Connected devices")
+
+    def test_validate_knowledge_pack_integrity(self) -> None:
+        """Test validate_knowledge_pack detects both semantic mismatches and broken transitions."""
+        from builder import validate_knowledge_pack
+
+        # Valid setup
+        self.builder.add_screen({
+            "screen_id": "s1",
+            "name": "Screen 1",
+            "elements": [
+                {
+                    "element_id": "e1",
+                    "text": "Network & internet",
+                    "purpose": "role=text; label=Network & internet; interaction=none",
+                },
+                {
+                    "element_id": "e2",
+                    "text": "",
+                    "content_description": "Search icon",
+                    "purpose": "role=button; label=Search icon; interaction=tap",
+                },
+            ],
+        })
+        self.builder.add_screen({"screen_id": "s2", "name": "Screen 2"})
+        self.builder.record_transition({
+            "transition_id": "t1",
+            "source_screen_id": "s1",
+            "destination_screen_id": "s2",
+            "action": {"action_id": "a1", "action_type": "tap"},
+            "status": "success",
+        })
+
+        res = self.builder.validate_semantic_integrity()
+        self.assertTrue(res["valid"])
+        self.assertEqual(len(res["element_errors"]), 0)
+        self.assertEqual(len(res["transition_errors"]), 0)
+
+        # Introduce semantic mismatch: e1 has text "Network & internet" but label "Sound & vibration"
+        self.builder.pack.screens["s1"].elements[0].purpose = "role=text; label=Sound & vibration; interaction=none"
+        res2 = self.builder.validate_semantic_integrity()
+        self.assertFalse(res2["valid"])
+        self.assertEqual(len(res2["element_errors"]), 1)
+        self.assertIn("semantic mismatch", res2["element_errors"][0])
+
+        # Restore e1 and break transition
+        self.builder.pack.screens["s1"].elements[0].purpose = "role=text; label=Network & internet; interaction=none"
+        self.builder.pack.transitions[0].destination_screen_id = "missing_screen"
+        res3 = self.builder.validate_semantic_integrity()
+        self.assertFalse(res3["valid"])
+        self.assertEqual(len(res3["transition_errors"]), 1)
+        self.assertIn("missing destination screen", res3["transition_errors"][0])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -32,6 +32,7 @@ try:
         TransitionData,
         UIElementData,
     )
+    from agent.semantic import classify_element
 except (ImportError, ValueError):
     from ..knowledge.builder import KnowledgeBuilder
     from ..knowledge.models import (
@@ -41,6 +42,7 @@ except (ImportError, ValueError):
         TransitionData,
         UIElementData,
     )
+    from ..agent.semantic import classify_element
 
 
 def build_knowledge_builder(
@@ -122,9 +124,22 @@ def build_knowledge_builder(
         elements: List[UIElementData] = []
         for elem in raw_elements:
             if isinstance(elem, UIElementData):
+                if not elem.purpose:
+                    classified = classify_element(elem.to_dict())
+                    role = str(classified.get("role", "unknown"))
+                    label = str(classified.get("label", ""))
+                    interaction = str(classified.get("interaction", "none"))
+                    elem.purpose = f"role={role}; label={label}; interaction={interaction}"
                 elements.append(elem)
             elif isinstance(elem, dict):
-                elements.append(UIElementData.from_dict(elem))
+                elem_dict = dict(elem)
+                if not elem_dict.get("purpose"):
+                    classified = classify_element(elem_dict)
+                    role = str(classified.get("role", "unknown"))
+                    label = str(classified.get("label", ""))
+                    interaction = str(classified.get("interaction", "none"))
+                    elem_dict["purpose"] = f"role={role}; label={label}; interaction={interaction}"
+                elements.append(UIElementData.from_dict(elem_dict))
 
         screen = ScreenData(
             screen_id=fingerprint,

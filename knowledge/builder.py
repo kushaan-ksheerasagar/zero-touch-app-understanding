@@ -7,6 +7,7 @@ and serialize App Knowledge Packs and navigation graphs.
 
 import json
 import os
+import re
 import time
 from typing import Any, Dict, List, Optional, Union
 
@@ -79,10 +80,16 @@ class KnowledgeBuilder:
             existing.screenshot_path = screen_obj.screenshot_path or existing.screenshot_path
             existing.design.update(screen_obj.design)
 
-            # Merge UI elements by element_id
-            existing_elem_map = {e.element_id: e for e in existing.elements}
-            for new_elem in screen_obj.elements:
-                existing_elem_map[new_elem.element_id] = new_elem
+            # Merge UI elements preserving distinct elements with identical IDs (distinguished by bounds or index)
+            existing_elem_map = {}
+            for idx, e in enumerate(existing.elements):
+                bounds_key = tuple(e.bounds) if e.bounds and e.bounds != [0, 0, 0, 0] else idx
+                existing_elem_map[(e.element_id, bounds_key)] = e
+
+            for idx, new_elem in enumerate(screen_obj.elements):
+                bounds_key = tuple(new_elem.bounds) if new_elem.bounds and new_elem.bounds != [0, 0, 0, 0] else idx
+                existing_elem_map[(new_elem.element_id, bounds_key)] = new_elem
+
             existing.elements = list(existing_elem_map.values())
 
             # Merge actions by action_id
@@ -361,3 +368,100 @@ class KnowledgeBuilder:
         """Instantiate KnowledgeBuilder from a dictionary."""
         pack = AppKnowledgePack.from_dict(data)
         return cls(pack=pack)
+
+    def validate_semantic_integrity(self) -> Dict[str, Any]:
+        """Validate semantic consistency and transition integrity of current pack."""
+        return validate_knowledge_pack(self.pack)
+
+
+def validate_knowledge_pack(pack: Union[AppKnowledgePack, Dict[str, Any]]) -> Dict[str, Any]:
+    """
+    Validates semantic consistency and graph reference integrity of an AppKnowledgePack.
+
+    Checks:
+    1. For every element on every screen:
+       - Raw text and content_description are checked.
+       - If a semantic label is present in 'purpose' (e.g. 'label=...'), it must be
+         derived exclusively from that element's own text or content_description.
+    2. For every transition:
+       - Source screen exists.
+       - Destination screen exists.
+       - Action exists and has an action_type.
+       - Status exists.
+    """
+    element_errors: List[str] = []
+    transition_errors: List[str] = []
+
+    # Normalize pack
+    if isinstance(pack, dict):
+        screens = pack.get("screens", {})
+        transitions = pack.get("transitions", [])
+    else:
+        screens = pack.screens
+        transitions = pack.transitions
+
+    screen_keys = set(screens.keys())
+
+    # 1. Validate element semantic consistency
+    label_regex = re.compile(r"label=([^;]*)")
+    for s_id, s_val in screens.items():
+        if isinstance(s_val, dict):
+            elems = s_val.get("elements", [])
+            s_name = s_val.get("name", s_id)
+        else:
+            elems = s_val.elements
+            s_name = s_val.name
+
+        for idx, elem in enumerate(elems):
+            if isinstance(elem, dict):
+                text = str(elem.get("text", "") or "").strip()
+                desc = str(elem.get("content_description", "") or "").strip()
+                purpose = str(elem.get("purpose", "") or "")
+                el_id = elem.get("element_id", f"idx_{idx}")
+            else:
+                text = str(elem.text or "").strip()
+                desc = str(elem.content_description or "").strip()
+                purpose = str(elem.purpose or "")
+                el_id = elem.element_id or f"idx_{idx}"
+
+            expected_label = text if text else desc
+
+            match = label_regex.search(purpose)
+            if match:
+                actual_label = match.group(1).strip()
+                if actual_label != expected_label:
+                    element_errors.append(
+                        f"Screen '{s_name}' element '{el_id}' semantic mismatch: "
+                        f"raw text='{text}', desc='{desc}', but purpose label='{actual_label}'"
+                    )
+
+    # 2. Validate transitions
+    for t_idx, trans in enumerate(transitions):
+        if isinstance(trans, dict):
+            src = trans.get("source_screen_id") or trans.get("source_state") or ""
+            dst = trans.get("destination_screen_id") or trans.get("destination_state") or ""
+            action = trans.get("action")
+            status = trans.get("status")
+            t_id = trans.get("transition_id", f"trans_{t_idx}")
+        else:
+            src = trans.source_screen_id
+            dst = trans.destination_screen_id
+            action = trans.action
+            status = trans.status
+            t_id = trans.transition_id
+
+        if not src or src not in screen_keys:
+            transition_errors.append(f"Transition '{t_id}' references missing source screen: '{src}'")
+        if not dst or dst not in screen_keys:
+            transition_errors.append(f"Transition '{t_id}' references missing destination screen: '{dst}'")
+        if not action:
+            transition_errors.append(f"Transition '{t_id}' is missing an action definition")
+        if not status:
+            transition_errors.append(f"Transition '{t_id}' is missing a status")
+
+    is_valid = (len(element_errors) == 0) and (len(transition_errors) == 0)
+    return {
+        "valid": is_valid,
+        "element_errors": element_errors,
+        "transition_errors": transition_errors,
+    }
