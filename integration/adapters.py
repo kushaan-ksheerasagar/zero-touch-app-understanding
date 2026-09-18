@@ -80,18 +80,20 @@ def to_api_action(agent_action: Dict[str, Any]) -> Dict[str, Any]:
     result: Dict[str, Any] = {"action": action_name}
 
     target = agent_action.get("target")
+    parameters = dict(agent_action.get("parameters") or {})
     if isinstance(target, dict) and target:
         cleaned_target: Dict[str, Any] = {}
         if "element_id" in target and target["element_id"]:
             cleaned_target["element_id"] = str(target["element_id"])
         if "coordinates" in target:
             cleaned_target["coordinates"] = list(target["coordinates"])
+        if "text" in target and target["text"] and "text" not in parameters:
+            parameters["text"] = str(target["text"])
         if cleaned_target:
             result["target"] = cleaned_target
 
-    parameters = agent_action.get("parameters")
-    if isinstance(parameters, dict) and parameters:
-        result["parameters"] = dict(parameters)
+    if parameters:
+        result["parameters"] = parameters
 
     return result
 
@@ -109,8 +111,13 @@ def to_controller_action(api_action: Dict[str, Any]) -> Dict[str, Any]:
     parameters = action_dict.get("parameters", {})
 
     # Map parameters.text to action["text"] for Controller type action
-    if action_type == "type" and "text" in parameters and "text" not in action_dict:
-        action_dict["text"] = parameters["text"]
+    if action_type == "type":
+        if "text" in parameters and "text" not in action_dict:
+            action_dict["text"] = parameters["text"]
+        elif "text" not in action_dict:
+            target = action_dict.get("target") or {}
+            if "text" in target:
+                action_dict["text"] = target["text"]
 
     # Map parameters.direction to action["direction"] for Controller scroll action
     if action_type == "scroll" and "direction" in parameters and "direction" not in action_dict:

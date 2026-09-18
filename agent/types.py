@@ -6,7 +6,7 @@ from typing import Literal, Optional, Any, Union
 from dataclasses import dataclass, field
 
 
-ActionType = Literal["tap", "back", "scroll", "wait", "stop"]
+ActionType = Literal["tap", "type", "back", "scroll", "wait", "stop"]
 
 
 @dataclass

@@ -106,14 +106,17 @@ AVAILABLE UNEXPLORED INTERACTIONS:
 
 EXPLORATION INSTRUCTIONS:
 1. Explore unfamiliar apps systematically and thoroughly.
-2. Prefer safe, unexplored interactive elements (navigation, buttons, text inputs).
-3. Avoid destructive or irreversible actions (e.g., delete, remove, uninstall, purchase, pay, checkout, transfer, send, submit, factory reset).
-4. NEVER invent element IDs or coordinates. Only select an element_id that explicitly exists in the SEMANTIC UI ELEMENTS list above.
-5. Do NOT target disabled elements.
-6. If a screen has no useful unexplored controls, use action 'back' to return to previous screens.
-7. If exploration is complete or terminal, use action 'stop'.
-8. Do NOT fabricate user credentials or data.
-9. Do NOT make assumptions about unavailable UI elements.
+2. PREFER UNEXPLORED CONTROLS ON CURRENT SCREEN: On each screen, identify meaningful unexplored interactive elements from AVAILABLE UNEXPLORED INTERACTIONS. You MUST prioritize unexplored navigation/actions on the current application screen (such as search, navigation buttons, or items) before choosing 'back'.
+3. CRITICAL: Do NOT choose action 'back' if there are still meaningful unexplored interactive controls remaining on the current application screen.
+4. Only choose action 'back' when:
+   - There are NO meaningful unexplored actions remaining on the current screen, OR
+   - The current screen is otherwise exhausted.
+5. Avoid destructive or irreversible actions (e.g., delete, remove, uninstall, purchase, pay, checkout, transfer, send, submit, factory reset).
+6. NEVER invent element IDs or coordinates. Only select an element_id that explicitly exists in the SEMANTIC UI ELEMENTS list above.
+7. Do NOT target disabled or already-explored elements.
+8. If exploration is complete or terminal, use action 'stop'.
+9. In controlled demo/test environments requiring input, use safe test credentials (e.g. 'test@zerotouch.com' for email, 'demo123' for password, or safe catalog search terms like 'Headphones'). Do NOT use real personal credentials.
+10. Do NOT make assumptions about unavailable UI elements.
 
 REQUIRED OUTPUT FORMAT:
 Respond strictly with a single valid JSON object. Do not include explanatory text outside the JSON object:

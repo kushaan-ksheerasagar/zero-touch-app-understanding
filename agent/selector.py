@@ -103,6 +103,11 @@ class ActionSelector:
                 "go",
                 "ok",
                 "yes",
+                "item",
+                "product",
+                "card",
+                "catalog",
+                "detail",
             )
             if any(cue in lower_label for cue in action_intent_cues):
                 score += 15

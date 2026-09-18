@@ -123,6 +123,9 @@ def main() -> int:
 
     try:
         summary = explorer.run()
+        demo_pack_path = os.path.join(PROJECT_ROOT, "artifacts", "zerotouch_demo_knowledge_pack.json")
+        explorer.knowledge_builder.export_json(demo_pack_path)
+        print(f"\nPresentation Knowledge Pack also saved to:\nartifacts/zerotouch_demo_knowledge_pack.json")
         return 0
     except Exception as exc:
         print(f"\n[ERROR] Autonomous exploration encountered unexpected error: {exc}")
